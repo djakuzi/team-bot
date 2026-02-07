@@ -7,4 +7,5 @@ export interface ISceneProvider {
 	cron?: Provider[];
 	handler?: Provider[];
 	listener?: Provider[];
+	repo?: Provider[]
 } 

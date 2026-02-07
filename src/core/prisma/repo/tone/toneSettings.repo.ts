@@ -1,29 +1,31 @@
 import { Injectable } from '@nestjs/common';
-import type { Prisma, ToneSettings } from '@prisma/client';
+import type { Prisma } from '@prisma/client';
 import { ServicePrisma } from '@tb-core/prisma/prisma.service';
 
 @Injectable()
 export class RepoToneSettings {
-	constructor(private prisma: ServicePrisma) {}
-	
-	async findOne(): Promise<ToneSettings | null> {
-		return this.prisma.toneSettings.findFirst({
-			include: {
-				tone: true,
-			},
+	constructor(private readonly prisma: ServicePrisma) { }
+
+	async create(data: Prisma.ToneSettingsUpdateInput) {
+		return await this.prisma.toneSettings.create({
+			data: data as Prisma.ToneSettingsCreateInput,
 		});
 	}
 
-	async update(data: Prisma.ToneSettingsUpdateInput): Promise<ToneSettings> {
+	async findOne<T extends Prisma.ToneSettingsFindFirstArgs>(
+		args?: T
+	): Promise<Prisma.ToneSettingsGetPayload<T> | null> {
+		return await this.prisma.toneSettings.findFirst(args ? args : {}) as any;
+	}
+
+	async update(data: Prisma.ToneSettingsUpdateInput) {
 		const existing = await this.prisma.toneSettings.findFirst();
 
 		if (!existing) {
-			return this.prisma.toneSettings.create({
-				data: data as Prisma.ToneSettingsCreateInput,
-			});
+			return await this.create(data);
 		}
 
-		return this.prisma.toneSettings.update({
+		return await this.prisma.toneSettings.update({
 			where: { id: existing.id },
 			data,
 		});

@@ -10,37 +10,39 @@ import { StrategyGetSettingsTone } from "./factory/strategies/get/toneSettings.s
 import { StrategySetRandomToneMode } from "./factory/strategies/set/randomTone.strategy";
 import { StrategySetToneMode } from "./factory/strategies/set/toneMode.strategy";
 import { StrategySetUpdatedTimeTone } from "./factory/strategies/set/updatedTimeTone.strategy";
-import { CronToneUpdateByTime } from "./cron/CronToneUpdateTime.service";
-import { HandlerChangeTimeUpdatedTone } from "./listener/handlers/changeTimeUpdatedTone.handler";
+import { CronToneUpdateByTime } from "./cron/toneUpdateTime.cron";
+import { HandlerToneTimeChanged } from "./listener/handlers/toneTimeChanged.handler";
 import { ListenerTone } from "./listener/tone.listener";
 import { ISceneProvider } from "@tb-common/interfaces/scheme/schemeProvider.interface";
+import { StrategyGetCurrentTone } from "./factory/strategies/get/currnetTone";
 
 export const SCHEME_TONE: ISceneProvider = {
-	services: [
-		ServiceTone,
-		ServiceToneSettings
-	],
-	factory: [
-		FactoryAddTone,
-		FactoryGetTone,
-		FactorySetTone
-	],
-	strategies: [
-		StrategyAddNewToneMode,
-		StrategySetUpdatedTimeTone,
-		StrategySetRandomToneMode,
-		StrategySetToneMode,
-		StrategyGetSettingsTone,
-		StrategyGetListTone,
-		StrategyGetToneMode
-	],
-	cron: [
-		CronToneUpdateByTime
-	],
-	handler: [
-		HandlerChangeTimeUpdatedTone,
-	],
-	listener: [
-		ListenerTone,
-	]
+    services: [
+        ServiceTone,
+        ServiceToneSettings
+    ],
+    factory: [
+        FactoryAddTone,
+        FactoryGetTone,
+        FactorySetTone
+    ],
+    strategies: [
+        StrategyAddNewToneMode,
+        StrategySetUpdatedTimeTone,
+        StrategySetRandomToneMode,
+        StrategySetToneMode,
+        StrategyGetSettingsTone,
+        StrategyGetListTone,
+        StrategyGetToneMode,
+        StrategyGetCurrentTone
+    ],
+    cron: [
+        CronToneUpdateByTime
+    ],
+    handler: [
+        HandlerToneTimeChanged,
+    ],
+    listener: [
+        ListenerTone,
+    ]
 }

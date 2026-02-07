@@ -4,7 +4,7 @@ import { ServicePrisma } from '@tb-core/prisma/prisma.service';
 
 @Injectable()
 export class RepoTone {
-	constructor(private prisma: ServicePrisma) { }
+	constructor(private readonly prisma: ServicePrisma) { }
 
 	async findAll(): Promise<Tone[]> {
 		return this.prisma.tone.findMany();

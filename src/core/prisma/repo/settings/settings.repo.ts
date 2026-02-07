@@ -4,7 +4,7 @@ import { ServicePrisma } from '@tb-core/prisma/prisma.service';
 
 @Injectable()
 export class RepoSettings {
-	constructor(private prisma: ServicePrisma) { }
+	constructor(private readonly prisma: ServicePrisma) { }
 
 	async createSettings(settigns: Omit<Settings, 'id'>) {
 

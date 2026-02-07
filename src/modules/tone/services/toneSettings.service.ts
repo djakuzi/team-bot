@@ -1,30 +1,19 @@
 import { Injectable } from "@nestjs/common";
 import { FactoryGetTone } from "../factory/get.factory";
 import { FactorySetTone } from "../factory/set.factory";
-import { validateTimeFormat } from "@tb-common/utils/valid/validateTimeFormat.util";
-import { EventEmitter2 } from "@nestjs/event-emitter";
-import { EventChangeTimeUpdatedTone } from "../events/changeTimeUpdatedTone.event";
 
 @Injectable()
 export class ServiceToneSettings {
 	constructor(
 		private readonly factoryGetTone: FactoryGetTone,
 		private readonly factorySetTone: FactorySetTone,
-		private readonly eventEmitter: EventEmitter2,
 	) {
 	}
 
 	async setUpdatedToneTime(time: string) {
-		validateTimeFormat(time, 'hh:mm', true);
-
 		const strategy = this.factorySetTone.getStrategy('updatedTimeMode');
 		const result = await strategy.execute(time);
-		
-		this.eventEmitter.emit(
-			EventChangeTimeUpdatedTone.eventName,
-			new EventChangeTimeUpdatedTone(result.updateTime, { isCron: false })
-		);
-
+	
 		return result;
 	}
 
@@ -48,9 +37,9 @@ export class ServiceToneSettings {
 	}
 
 	async getCurrnetTone() {
-		const strategy = this.factoryGetTone.getStrategy('settingsTone');
-		const res = await strategy.execute();
+		const strategy = this.factoryGetTone.getStrategy('getCurrentTone');
+		const result = await strategy.execute();
 
-		return res;
+		return result;
 	}
 }

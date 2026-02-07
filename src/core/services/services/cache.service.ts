@@ -4,12 +4,12 @@ import { Memory } from '@tb-core/libs/memory/index.lib';
 interface CacheRecord<T> {
 	value: T;
 	expiresAt?: number;
-} 
+}
 
 @Injectable()
-export class ServiceCache {
+export class GServiceCache {
 	private store = new Map<string, CacheRecord<any>>();
-	private memory: number | null = null;
+	private memory: string | null = null;
 
 	constructor() {
 		setInterval(() => this.cleanup(), 300000);
@@ -69,17 +69,8 @@ export class ServiceCache {
 		this.memory = null;
 	}
 
-	getCacheSizeMbValuesOnly(): number {
-		if (this.memory) {
-			return this.memory;
-		}
-		
-		let totalBytes = 0;
-
-		for (const record of this.store.values()) {
-			totalBytes += Memory.calc(record.value);
-		}
-
-		return totalBytes / (1024 * 1024);
+	getCacheSizeMbValuesOnly(): string {
+        this.memory = this.memory ? this.memory : Memory.calc(this.store).mb;
+        return this.memory;
 	}
 }

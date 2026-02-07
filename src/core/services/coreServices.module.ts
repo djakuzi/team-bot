@@ -1,17 +1,17 @@
 import { Global, Module } from '@nestjs/common';
-import { ServiceAwaitingUser } from './services/awaitingUser.service';
-import { ServiceCache } from './services/cache.service';
+import { GServiceAwaitingUser } from './services/awaitingUser.service';
+import { GServiceCache } from './services/cache.service';
 
 @Global()
 @Module({
 	imports: [],
 	providers: [
-		ServiceAwaitingUser,
-		ServiceCache,
+		GServiceAwaitingUser,
+		GServiceCache,
 	],
 	exports: [
-		ServiceAwaitingUser,
-		ServiceCache,
+		GServiceAwaitingUser,
+		GServiceCache,
 	]
 })
-export class ModuleCoreServices {}
+export class GModuleServices { }

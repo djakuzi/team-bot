@@ -1,8 +1,7 @@
 import { Global, Module } from '@nestjs/common';
 import { ModuleConfig } from './config/config.module';
-import { ModuleLogger } from './logger/logger.module';
-import { ModulePrisma } from './prisma/prisma.module';
-import { ModuleCoreServices } from './services/coreServices.module';
+import { GModuleLogger } from './logger/logger.module';
+import { GModuleServices } from './services/coreServices.module';
 import { ModuleEvent } from './event/event.module';
 
 @Global()
@@ -10,9 +9,8 @@ import { ModuleEvent } from './event/event.module';
 	imports: [
 		ModuleConfig,
 		ModuleEvent,
-		ModuleLogger,
-		ModulePrisma,
-		ModuleCoreServices
+		GModuleLogger,
+		GModuleServices,
 	],
 })
 export class ModuleCore {};

@@ -9,9 +9,14 @@ interface IConfigNode {
 	port: TProccesEnv;
 }
 
+interface IConfigAi {
+	token: TProccesEnv;
+}
+
 export interface IConfigApp {
 	bot: IConfigBot;
 	node: IConfigNode;
+	ai: IConfigAi
 }
 
 const createAppConfig = (): IConfigApp => ({
@@ -22,6 +27,9 @@ const createAppConfig = (): IConfigApp => ({
 		mode: process.env.NODE_MODE,
 		port: process.env.NODE_PORT,
 	},
+	ai: {
+		token: process.env.HF_API_TOKEN
+	}
 });
 
 export default createAppConfig;

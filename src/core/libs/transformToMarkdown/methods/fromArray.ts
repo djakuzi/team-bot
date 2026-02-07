@@ -1,4 +1,5 @@
 import { changeKeyInObjectFromArray } from "../helpers/changeKeyInObject.helper";
+import { escapeMarkdownV2 } from "../helpers/escapeMarkdownV2.helper";
 
 type TypeKeyMarkdown = 'title' | 'description' | 'content' | 'code';
 
@@ -6,14 +7,14 @@ type TypeChangeKey<T> = {
 	[K in TypeKeyMarkdown]?: keyof T;
 };
 
-function escapeMarkdownV2(text: string): string {
-	return text.replace(/[_*[\]()~`>#+\-=|{}.!\\]/g, '\\$&');
-}
-
 export class TransformFromArray {
 
-	public static transformToMarkdown(array: Record<TypeKeyMarkdown, string>[], include: TypeKeyMarkdown[]) {
-		let text = '';
+	public static transformToMarkdown(
+		array: Record<TypeKeyMarkdown, string>[], 
+		include: TypeKeyMarkdown[],
+		title?: string,
+	) {
+		let text = `${title ? escapeMarkdownV2(title) + '\n\n' : ''}`;
 
 		const isDesc  =	 include.includes('description');
 		const isTitle =	 include.includes('title');
@@ -39,7 +40,8 @@ export class TransformFromArray {
 	static build<A extends Record<string, unknown>>(
 		array: A[],
 		include: TypeKeyMarkdown[],
-		changeKey: TypeChangeKey<A> | null = null
+		changeKey: TypeChangeKey<A> | null = null,
+		title?: string,
 	): string {
 		let resArray: Record<TypeKeyMarkdown, string>[] = [];
 
@@ -53,6 +55,6 @@ export class TransformFromArray {
 			resArray = array as unknown as Record<TypeKeyMarkdown, string>[];
 		}
 
-		return this.transformToMarkdown(resArray, include);
+		return this.transformToMarkdown(resArray, include, title);
 	}
 }

@@ -15,7 +15,7 @@ interface KeyboardConfig {
 	excludeKeys?: string[];
 	excludeValues?: ButtonConfig[];
 	additionalButtons?: ButtonConfig[];
-	placeDdditionalButtons?: 'start' | 'end';
+	placeAdditionalButtons?: 'start' | 'end';
 }
 
 export function buildInlineKeyboard(config: KeyboardConfig): InlineKeyboardButton[][] {
@@ -26,7 +26,7 @@ export function buildInlineKeyboard(config: KeyboardConfig): InlineKeyboardButto
 		excludeKeys = [],
 		excludeValues = [],
 		additionalButtons = [],
-		placeDdditionalButtons = 'start',
+		placeAdditionalButtons = 'start',
 	} = config;
 
 	const excludeActions = new Set(excludeValues.map(v => v.action));
@@ -40,7 +40,7 @@ export function buildInlineKeyboard(config: KeyboardConfig): InlineKeyboardButto
 
 	let allButtons: ButtonConfig[];
 	
-	if (placeDdditionalButtons === 'start') {
+	if (placeAdditionalButtons === 'start') {
 		allButtons = [...additionalButtons, ...mainButtons];
 	} else {
 		allButtons = [...mainButtons, ...additionalButtons];

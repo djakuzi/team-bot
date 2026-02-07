@@ -1,0 +1,11 @@
+export class LocaleDate {
+    static toLocaleDate(date: Date, type?: Intl.LocalesArgument): string {
+        return date.toLocaleString(type ?? 'ru-RU', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+        });
+    }
+}

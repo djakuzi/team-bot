@@ -1,28 +1,34 @@
 import { Injectable } from "@nestjs/common";
-import { validateTimeFormat } from "@tb-common/utils/valid/validateTimeFormat.util";
+import { EventEmitter2 } from "@nestjs/event-emitter";
+import { LibTime } from "@tb-core/libs/time/index.lib";
 import { RepoToneSettings } from "@tb-core/prisma/repo/tone/toneSettings.repo";
+import { EventToneTimeChanged } from "@tb-modules/tone/events/toneTimeChanged.event";
 
 @Injectable()
 export class StrategySetUpdatedTimeTone {
-	constructor(
-		private readonly repoToneSettings: RepoToneSettings,
-	) { }
+    constructor(
+        private readonly repoToneSettings: RepoToneSettings,
+        private readonly eventEmitter: EventEmitter2,
+    ) { }
 
-	async execute(time: string) {
-		if (!validateTimeFormat(time)) {
-			throw new Error('Неверный формат времени. Используйте hh:mm')
-		}
+    async execute(time: string) {
+        LibTime.validate(time, 'hh:mm', true);
 
-		const result = await this.repoToneSettings.update({
-			updateTime: time,
-		});
+        const result = await this.repoToneSettings.update({
+            updateTime: time,
+        });
 
-		if (!result.updateTime) {
-			throw new Error('Не удалось задать время изменение тона. Заданное время: ' + time);
-		}
+        if (!result.updateTime) {
+            throw new Error('Не удалось задать время изменение тона. Заданное время: ' + time);
+        }
 
-		return {
-			updateTime: result.updateTime,
-		}
-	}
+        this.eventEmitter.emit(
+            EventToneTimeChanged.eventName,
+            new EventToneTimeChanged(result.updateTime, { isCron: false })
+        );
+
+        return {
+            updateTime: result.updateTime,
+        }
+    }
 }

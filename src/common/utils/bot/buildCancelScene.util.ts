@@ -10,13 +10,13 @@ export async function buildCancelScene(
 	message: string,
 	dataHandler: IDataEvent,
 ) {
-	await ctx.reply(
-		message,
-		Markup.inlineKeyboard([
-			Markup.button.callback(
-				dataHandler.desc,
-				dataHandler.name,
-			),
-		]),
-	);
+    await ctx.reply(
+        message,
+        Markup.inlineKeyboard([
+            Markup.button.callback(
+                dataHandler.desc,
+                dataHandler.name,
+            ),
+        ]),
+    );
 }

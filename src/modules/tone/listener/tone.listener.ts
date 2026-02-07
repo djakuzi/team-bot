@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
-import { EventChangeTimeUpdatedTone } from '../events/changeTimeUpdatedTone.event';
-import { HandlerChangeTimeUpdatedTone } from './handlers/changeTimeUpdatedTone.handler';
+import { EventToneTimeChanged } from '../events/toneTimeChanged.event';
+import { HandlerToneTimeChanged } from './handlers/toneTimeChanged.handler';
 
 @Injectable()
 export class ListenerTone {
-	constructor(
-		private readonly handlerChangeTimeUpdatedTone: HandlerChangeTimeUpdatedTone,
-	) { }
+    constructor(
+        private readonly HandlerToneTimeChanged: HandlerToneTimeChanged,
+    ) { }
 
-	@OnEvent(EventChangeTimeUpdatedTone.eventName)
-	async handleChangeTimeUpdatedTone(payload: EventChangeTimeUpdatedTone) {
-		await this.handlerChangeTimeUpdatedTone.execute(payload);
-	}
+    @OnEvent(EventToneTimeChanged.eventName)
+    async handleChangeTimeUpdatedTone(payload: EventToneTimeChanged) {
+        await this.HandlerToneTimeChanged.execute(payload);
+    }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 
 @Injectable()
-export class ServiceAwaitingUser {
+export class GServiceAwaitingUser {
 	private userStates = new Map<number, Record<string, unknown>>();
 
 	setState(userId: number, key: string, value: any) {

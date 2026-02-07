@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { FactoryAddTone } from "../factory/add.factory";
 import { FactoryGetTone } from "../factory/get.factory";
-import { TypeArgsStrategyAddTone } from "../factory/strategies/add/newToneMode.strategy";
+import { Prisma } from "@prisma/client";
 
 @Injectable()
 export class ServiceTone {
@@ -10,7 +10,7 @@ export class ServiceTone {
 		private readonly factoryGetTone: FactoryGetTone,
 	) { }
 
-	async addToneMode(tone: TypeArgsStrategyAddTone) {
+	async addToneMode(tone: Prisma.ToneCreateInput) {
 		const strategy = this.factoryAddTone.getStrategy('newToneMode');
 		return await strategy.execute(tone);
 	}

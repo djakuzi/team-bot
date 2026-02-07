@@ -1,28 +1,42 @@
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
 }
 
 model Settings {
-  id          Int      @id @default(autoincrement())
-  connectedIdChat     BigInt      @unique
+    id          Int      @id @default(autoincrement())
+    connectedIdChat     BigInt      @unique
 }
 
 model Tone {
-  id        Int          @id @default(autoincrement())
-  name      String       @unique
-  desc      String
-  settings  ToneSettings?
+    id        Int          @id @default(autoincrement())
+    name      String       @unique
+    desc      String
+    settings  ToneSettings?
 }
 
 model ToneSettings {
-  id          Int      @id @default(autoincrement())
-  toneId      Int      @unique       // уникальный, чтобы был 1:1
-  updateTime  String?  // например "09:00"
-  tone        Tone     @relation(fields: [toneId], references: [id])
+    id          Int      @id @default(autoincrement())
+    toneId      Int      @unique
+    updateTime  String?  // например "09:00"
+    tone        Tone     @relation(fields: [toneId], references: [id])
 }
 
+model MessageSettings {
+	id          Int      @id @default(autoincrement())
+	updateTime  String? // например "09:00"
+}
+
+model Reminder {
+    id          Int      @id @default(autoincrement())
+    name        String
+    desc        String
+    repeat      Boolean
+    reapetRangeDays   Int
+    executedAt DateTime  @default(now())
+    lastExecutedAt DateTime?
+}

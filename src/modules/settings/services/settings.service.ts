@@ -2,23 +2,24 @@ import { Injectable } from "@nestjs/common";
 import { FactoryCreateSettings } from "../factory/create.factory";
 import { TypeArgsCreateBaseSettings } from "../factory/strategies/create/baseSettings.strategy";
 import { FactoryGetSettings } from "../factory/get.factory";
-import { ServiceCache } from "@tb-core/services/services/cache.service";
+import { GServiceCache } from "@tb-core/services/services/cache.service";
 import { Settings } from "@prisma/client";
 import { ExceptionResourceNotFound } from "@tb-common/exception/resourceNotFound.exception";
 import { FactoryRemoveSettings } from "../factory/remove.factory copy";
+import { BaseService } from "@tb-common/interfaces/service/baseService.interface";
 
 @Injectable()
-export class ServiceSettings {
-	private readonly key = {
+export class ServiceSettings implements BaseService {
+	readonly key = {
 		cache: 'database.settings.full',
 	}
 
 	constructor(
-		private readonly serviceCache: ServiceCache,
+		private readonly GServiceCache: GServiceCache,
 		private readonly factoryCreateSettings: FactoryCreateSettings,
 		private readonly factoryGetSettings: FactoryGetSettings,
 		private readonly factoryRemoveSettings: FactoryRemoveSettings,
-	) {}
+	) { }
 
 	async createSettings(settings: TypeArgsCreateBaseSettings) {
 		const strategy = this.factoryCreateSettings['сreateBaseSettings'];
@@ -27,24 +28,24 @@ export class ServiceSettings {
 	}
 
 	async getSettings(useCache: boolean = true) {
-		let settings: Settings | null = useCache ? this.serviceCache.get<Settings>(this.key.cache) : null;
-		
+		let settings: Settings | null = useCache ? this.GServiceCache.get<Settings>(this.key.cache) : null;
+
 		if (!settings || !useCache) {
 			const strategy = this.factoryGetSettings.getStrategy('getSettings');
 			const res = await strategy.execute();
 
 			if (!res) throw new ExceptionResourceNotFound('Настройки не найдены.');
 
-			this.serviceCache.set(this.key.cache, res);
+			this.GServiceCache.set(this.key.cache, res);
 			settings = res;
 		}
-				
+
 		return settings;
 	}
 
 	async removeSettings() {
 		const strategy = this.factoryRemoveSettings.getStrategy('removeSettings');
 		await strategy.execute();
-		this.serviceCache.delete(this.key.cache);
+		this.GServiceCache.delete(this.key.cache);
 	}
 }

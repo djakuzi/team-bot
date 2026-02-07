@@ -8,24 +8,24 @@ import { FactoryRemoveSettings } from "./factory/remove.factory copy";
 import { StrategyRemoveSettings } from "./factory/strategies/remove/removeSettings.strategy";
 
 
-export const SCHEME_SETTIПNS: ISceneProvider = {
-	services: [
-		ServiceSettings,
-	],
-	factory: [
-		FactoryCreateSettings,
-		FactoryGetSettings,
-		FactoryRemoveSettings
-	],
-	strategies: [
-		StrategyCreateBaseSettings,
-		StrategyGetSettings,
-		StrategyRemoveSettings
-	],
-	handler: [
+export const SCHEME_SETTINGS: ISceneProvider = {
+    services: [
+        ServiceSettings,
+    ],
+    factory: [
+        FactoryCreateSettings,
+        FactoryGetSettings,
+        FactoryRemoveSettings
+    ],
+    strategies: [
+        StrategyCreateBaseSettings,
+        StrategyGetSettings,
+        StrategyRemoveSettings
+    ],
+    handler: [
 
-	],
-	listener: [
+    ],
+    listener: [
 
-	]
+    ]
 }
