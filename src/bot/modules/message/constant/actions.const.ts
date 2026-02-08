@@ -10,11 +10,11 @@ export const ACTIONS_BOT_MESSAGE = {
   },
   getMessageToday: {
     action: 'get_messages_today',
-    desc: 'Получить сообщения за этот день',
+    desc: 'Сообщения за этот день',
   },
   getRetellingMessages: {
     action: 'get_retelling_messages',
-    desc: 'Получить пересказ сообщений',
+    desc: 'Анализ сообщений',
   },
   getMemoryStorage: {
     action: 'get_memory_messages',
@@ -26,14 +26,14 @@ export const ACTIONS_BOT_MESSAGE = {
   },
   getTimeRetellingMessage: {
     action: 'get_time_retelling_message',
-    desc: 'Время пересказа',
+    desc: 'Время авто-анализа',
   },
   setRetellingTime: {
     action: 'set_retelling_time',
-    desc: 'Изменить время генерации пересказа',
+    desc: 'Изменить время анализа',
   },
   commands: {
     action: 'get_message_commands',
-    desc: 'Список команд',
+    desc: '📝 Команды',
   },
 } satisfies TListDescUpdate<IDescActionUpdate>;

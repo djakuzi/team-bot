@@ -10,7 +10,7 @@ export const ACTIONS_BOT_SETTINGS = {
   },
   connectThisChat: {
     action: 'connect_this_chat',
-    desc: 'Подключить этот чат к боту',
+    desc: 'Подключить этот чат',
   },
   getСonnectedChat: {
     action: 'get_connected_chat',
@@ -18,7 +18,7 @@ export const ACTIONS_BOT_SETTINGS = {
   },
   disconnectThisChat: {
     action: 'disconnect_this_chat',
-    desc: 'Отключить этот чат от бота',
+    desc: 'Отключить чат',
   },
   getSizeCache: {
     action: 'get_size_cache',

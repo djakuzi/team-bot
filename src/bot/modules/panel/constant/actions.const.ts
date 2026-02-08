@@ -18,6 +18,6 @@ export const ACTIONS_BOT_PANEL = {
   },
   commands: {
     action: 'get_message_panel',
-    desc: 'Список команд',
+    desc: '📝 Команды',
   },
 } satisfies TListDescUpdate<IDescActionUpdate>;

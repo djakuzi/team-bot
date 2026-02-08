@@ -19,9 +19,9 @@ export async function showMenu(ctx: Context) {
   };
 
   if (data === ACTIONS_BOT_MENU.back.action) {
-    await ctx.editMessageText('Выберите раздел:', extra);
+    await ctx.editMessageText('📋 Меню', extra);
     return;
   }
 
-  await ctx.reply('Выберите раздел:', extra);
+  await ctx.reply('📋 Меню', extra);
 }

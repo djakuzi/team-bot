@@ -1,11 +1,10 @@
-import {Action, Command, Ctx, On, Start, Update} from 'nestjs-telegraf';
-import {Context, Scenes} from 'telegraf';
+import {Ctx, On, Start, Update} from 'nestjs-telegraf';
+import {Context} from 'telegraf';
 import {COMMANDS_BOT} from './commands.const';
 import {getUpdate} from '@tb-bot/utils/context/getUpdate.util';
 import {COMMANDS_BOT_MENU} from './modules/menu/constant/commands.const';
 import {Update as TgUpdate} from 'telegraf/typings/core/types/typegram';
 import {ActionsBotSettings} from './modules/settings/updates/action.updates';
-import {getCallbackQuery} from '@tb-bot/utils/context/getCallbackQuery.util';
 
 @Update()
 export class UpdateBot {

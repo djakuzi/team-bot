@@ -15,6 +15,7 @@ import {ModuleBotMessage} from './modules/message/botMessage.module';
 import {ModuleBotReminder} from './modules/reminder/botReminder.module';
 import {ServiceBotCalendar} from './services/calendar.service';
 import {ModuleBotPanel} from './modules/panel/botPanel.module';
+import {BotCommandsService} from './bot.service';
 
 @Global()
 @Module({
@@ -43,6 +44,7 @@ import {ModuleBotPanel} from './modules/panel/botPanel.module';
       provide: APP_FILTER,
       useClass: BotExceptions,
     },
+    BotCommandsService,
     UpdateBot,
     ServiceBotCalendar,
   ],

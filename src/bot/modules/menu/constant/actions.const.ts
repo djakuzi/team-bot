@@ -36,10 +36,10 @@ export const ACTIONS_BOT_MENU = {
   },
   back: {
     action: 'menu_back',
-    desc: 'Выйти в меню',
+    desc: '↩️ Назад',
   },
   exit: {
     action: 'menu_close',
-    desc: 'Закрыть меню',
+    desc: '⬅️ Выйти',
   },
 } satisfies TListDescUpdate<IDescActionUpdate>;

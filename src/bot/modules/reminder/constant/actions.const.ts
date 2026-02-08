@@ -14,7 +14,7 @@ export const ACTIONS_BOT_REMINDER = {
   },
   addReminders: {
     action: 'add_reminders',
-    desc: 'Добавить напоминание',
+    desc: 'Добавить новое',
   },
   removeAllReminders: {
     action: 'remove_all_reminders',
@@ -22,6 +22,6 @@ export const ACTIONS_BOT_REMINDER = {
   },
   commands: {
     action: 'get_message_reminder',
-    desc: 'Список команд',
+    desc: '📝 Команды',
   },
 } satisfies TListDescUpdate<IDescActionUpdate>;

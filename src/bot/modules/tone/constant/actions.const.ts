@@ -18,11 +18,11 @@ export const ACTIONS_BOT_TONE = {
   },
   set_tone_time: {
     action: 'set_tone_time',
-    desc: 'Изменить время обновления тона',
+    desc: 'Изменить время обновления',
   },
   get_tone_time: {
     action: 'get_tone_time',
-    desc: 'Время обновления тона',
+    desc: 'Время обновления',
   },
   add_new_tone_mode: {
     action: 'add_new_tone_mode',
@@ -30,6 +30,6 @@ export const ACTIONS_BOT_TONE = {
   },
   tone_commands: {
     action: 'tone_commands',
-    desc: 'Список команд раздела',
+    desc: '📝 Команды',
   },
 } satisfies TListDescUpdate<IDescActionUpdate>;
