@@ -58,7 +58,6 @@ export class ServiceMessageAi {
         `;
 
     const retelling = await this.serviceAi.generateText(prompt);
-    console.log(retelling);
     return retelling ?? 'Не удалсь получить пересказ';
   }
 }
