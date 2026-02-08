@@ -1,5 +1,7 @@
 import {Injectable} from '@nestjs/common';
+import {ConfigService} from '@nestjs/config';
 import {OpenRouter} from '@openrouter/sdk';
+import {IConfigAi} from '@tb-core/config/configs/app.config';
 
 @Injectable()
 export class ServiceAi {
@@ -9,10 +11,16 @@ export class ServiceAi {
     stream: true,
   };
 
-  constructor() {
+  constructor(private configService: ConfigService) {
+    const aiConfig = this.configService.get<IConfigAi>('ai');
+    const apiKey = aiConfig?.token;
+
+    if (!apiKey) {
+      throw new Error('AI API token is missing in config');
+    }
+
     this.openRouter = new OpenRouter({
-      apiKey:
-        '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',
+      apiKey,
     });
   }
 

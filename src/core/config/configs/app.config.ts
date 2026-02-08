@@ -9,7 +9,7 @@ interface IConfigNode {
   port: TProccesEnv;
 }
 
-interface IConfigAi {
+export interface IConfigAi {
   token: TProccesEnv;
 }
 
