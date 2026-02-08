@@ -28,7 +28,7 @@ const createAppConfig = (): IConfigApp => ({
     port: process.env.NODE_PORT,
   },
   ai: {
-    token: process.env.HF_API_TOKEN,
+    token: process.env.AI_API_TOKEN,
   },
 });
 
