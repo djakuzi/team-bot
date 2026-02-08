@@ -1,7 +1,7 @@
-import { Scenes } from 'telegraf';
+import {Scenes} from 'telegraf';
 
 export async function cancelChangeTimeRetelling(ctx: Scenes.WizardContext) {
-	await ctx.answerCbQuery();
-	await ctx.reply('Изменение времени генерации пересказа сообщений отменено.');
-	await ctx.scene.leave();
+  await ctx.answerCbQuery();
+  await ctx.reply('Изменение времени генерации пересказа сообщений отменено.');
+  await ctx.scene.leave();
 }

@@ -1,80 +1,84 @@
-import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
-import { CronJob } from 'cron';
-import { ServiceToneSettings } from '../services/toneSettings.service';
-import { EventEmitter2 } from '@nestjs/event-emitter';
-import { EventToneUpdatedByTime } from '../events/updateToneByTime.event';
+import {Injectable, Logger, OnModuleInit} from '@nestjs/common';
+import {CronJob} from 'cron';
+import {ServiceToneSettings} from '../services/toneSettings.service';
+import {EventEmitter2} from '@nestjs/event-emitter';
+import {EventToneUpdatedByTime} from '../events/updateToneByTime.event';
 
 @Injectable()
 export class CronToneUpdateByTime implements OnModuleInit {
-	private readonly logger = new Logger(CronToneUpdateByTime.name);
-	private currentJob: CronJob | null = null;
-	private timeUpdateTone: string | null = null;
+  private readonly logger = new Logger(CronToneUpdateByTime.name);
+  private currentJob: CronJob | null = null;
+  private timeUpdateTone: string | null = null;
 
-	constructor(
-		private readonly serviceToneSettings: ServiceToneSettings,
-		private readonly eventEmitter: EventEmitter2,
-	) { }
+  constructor(
+    private readonly serviceToneSettings: ServiceToneSettings,
+    private readonly eventEmitter: EventEmitter2,
+  ) {}
 
-	async onModuleInit() {
-		try {
-			const time = await this.serviceToneSettings.getToneTime();
+  async onModuleInit() {
+    try {
+      const time = await this.serviceToneSettings.getToneTime();
 
-			if (time) {
-				this.scheduleToneUpdate(time);
-			}
-		} catch (error) {
-			console.error(error);
-		}
-	}
-
-    private async stopScheduledToneUpdate() {
-        if (this.currentJob) {
-            await this.currentJob.stop();
-            this.logger.log('Остановлена старая задача обновления тона');
-        }
+      if (time) {
+        this.scheduleToneUpdate(time);
+      }
+    } catch (error) {
+      console.error(error);
     }
+  }
 
-    private getCronTIme(time: string): string {
-        this.timeUpdateTone = time;
-
-        const [hour, minute] = time.split(':').map(Number);
-        const cronTime = `${minute} ${hour} * * *`;
-
-        return cronTime;
+  private async stopScheduledToneUpdate() {
+    if (this.currentJob) {
+      await this.currentJob.stop();
+      this.logger.log('Остановлена старая задача обновления тона');
     }
+  }
 
-	private async scheduleToneUpdate(time: string) {
-        await this.stopScheduledToneUpdate();
+  private getCronTIme(time: string): string {
+    this.timeUpdateTone = time;
 
-        this.logger.log(`Произошло обновление времени с ${this.timeUpdateTone} на ${time} по интервальному измению тона.`);
+    const [hour, minute] = time.split(':').map(Number);
+    const cronTime = `${minute} ${hour} * * *`;
 
-		this.currentJob = new CronJob(
-            this.getCronTIme(time),
-            this.executeUpdateTone.bind(this), 
-            null, 
-            true
-        );
+    return cronTime;
+  }
 
-        this.logger.log(`Произошло обновление времени с ${this.timeUpdateTone} на ${time} по интервальному измению тона.`);
+  private async scheduleToneUpdate(time: string) {
+    await this.stopScheduledToneUpdate();
 
-		this.currentJob.start();
-        
-		this.logger.log(`Запущена задача обновления тона на ${time}`);
-	}
+    this.logger.log(
+      `Произошло обновление времени с ${this.timeUpdateTone} на ${time} по интервальному измению тона.`,
+    );
 
-	private async executeUpdateTone() {
-		const tone = await this.serviceToneSettings.setRandomTone();
-		const message = (`Тон был обновлен по расписанию в ${this.timeUpdateTone}. \n Обновленный тон *${tone.name}* — ${tone.desc}`);
+    this.currentJob = new CronJob(
+      this.getCronTIme(time),
+      this.executeUpdateTone.bind(this),
+      null,
+      true,
+    );
 
-		this.eventEmitter.emit(
-			EventToneUpdatedByTime.eventName,
-			new EventToneUpdatedByTime(tone.name, tone.desc, { isCron: true })
-		);
+    this.logger.log(
+      `Произошло обновление времени с ${this.timeUpdateTone} на ${time} по интервальному измению тона.`,
+    );
 
-		this.logger.log(message);
-	}
+    this.currentJob.start();
 
-	updateScheduledTime(newTime: string) {
-		this.scheduleToneUpdate(newTime);
-	}
+    this.logger.log(`Запущена задача обновления тона на ${time}`);
+  }
+
+  private async executeUpdateTone() {
+    const tone = await this.serviceToneSettings.setRandomTone();
+    const message = `Тон был обновлен по расписанию в ${this.timeUpdateTone}. \n Обновленный тон *${tone.name}* — ${tone.desc}`;
+
+    this.eventEmitter.emit(
+      EventToneUpdatedByTime.eventName,
+      new EventToneUpdatedByTime(tone.name, tone.desc, {isCron: true}),
+    );
+
+    this.logger.log(message);
+  }
+
+  updateScheduledTime(newTime: string) {
+    this.scheduleToneUpdate(newTime);
+  }
 }

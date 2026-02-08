@@ -1,13 +1,11 @@
-import { Injectable } from "@nestjs/common";
-import { RepoReminder } from "@tb-core/prisma/repo/reminder/reminder.repo";
+import {Injectable} from '@nestjs/common';
+import {RepoReminder} from '@tb-core/prisma/repo/reminder/reminder.repo';
 
 @Injectable()
 export class StrategyGetOneReminder {
-    constructor(
-        readonly repoReminder: RepoReminder,
-    ) { }
+  constructor(readonly repoReminder: RepoReminder) {}
 
-    async execute() {
-        return this.repoReminder.findAll();
-    }
+  async execute() {
+    return this.repoReminder.findAll();
+  }
 }

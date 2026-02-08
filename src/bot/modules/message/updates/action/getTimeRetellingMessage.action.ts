@@ -1,35 +1,42 @@
-import { Context } from "telegraf";
-import { TypeUpdateContext } from "@tb-common/types/bot/update.type";
-import { ACTIONS_BOT_MESSAGE } from "../../constant/actions.const";
-import { ServiceMessageSettings } from "@tb-modules/message/services/messageSettings.service";
+import {Context} from 'telegraf';
+import {TypeUpdateContext} from '@tb-bot/types/update.type';
+import {ACTIONS_BOT_MESSAGE} from '../../constant/actions.const';
+import {ServiceMessageSettings} from '@tb-modules/message/services/messageSettings.service';
 
 export async function getTimeRetellingMessage(
-    ctx: Context,
-    serviceMessageSettings: ServiceMessageSettings,
-    source: TypeUpdateContext,
+  ctx: Context,
+  serviceMessageSettings: ServiceMessageSettings,
+  source: TypeUpdateContext,
 ) {
-    const isAction = source === 'action';
-    const isCommand = source === 'command';
+  const isAction = source === 'action';
+  const isCommand = source === 'command';
 
-    if (isAction) {
-        await ctx.answerCbQuery();
-    }
+  if (isAction) {
+    await ctx.answerCbQuery();
+  }
 
-    const time = await serviceMessageSettings.getTimeRetellingMessage();
+  const time = await serviceMessageSettings.getTimeRetellingMessage();
 
-    const message = time ? `Пересказ сообщений происходит в ${time}` : `не установлено`;
+  const message = time
+    ? `Пересказ сообщений происходит в ${time}`
+    : `не установлено`;
 
-    if (isAction) {
-        await ctx.editMessageText(message, {
-            reply_markup: {
-                inline_keyboard: [
-                    [{ text: ACTIONS_BOT_MESSAGE.menu.desc, callback_data: ACTIONS_BOT_MESSAGE.menu.action }],
-                ],
+  if (isAction) {
+    await ctx.editMessageText(message, {
+      reply_markup: {
+        inline_keyboard: [
+          [
+            {
+              text: ACTIONS_BOT_MESSAGE.menu.desc,
+              callback_data: ACTIONS_BOT_MESSAGE.menu.action,
             },
-        });
-    }
+          ],
+        ],
+      },
+    });
+  }
 
-    if (isCommand) {
-        await ctx.reply(message)
-    }
+  if (isCommand) {
+    await ctx.reply(message);
+  }
 }

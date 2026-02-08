@@ -1,7 +1,5 @@
-import { ActionsBotVpn } from "./updates/action.update";
+import {ActionsBotVpn} from './updates/action.update';
 
 export const SCHEME_BOT_VPN = {
-	updates: [
-		ActionsBotVpn,
-	],
-}
+  updates: [ActionsBotVpn],
+};

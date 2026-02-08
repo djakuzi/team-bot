@@ -1,20 +1,20 @@
-import { Injectable } from "@nestjs/common";
-import { ExceptionConflictResource } from "@tb-common/exception/conflictResource.exception";
-import { RepoSettings } from "@tb-core/prisma/repo/settings/settings.repo";
+import {Injectable} from '@nestjs/common';
+import {ExceptionConflictResource} from '@tb-common/exception/conflictResource.exception';
+import {RepoSettings} from '@tb-core/prisma/repo/settings/settings.repo';
 
 @Injectable()
 export class StrategyRemoveSettings {
-	constructor(
-		readonly repoSettings: RepoSettings,
-	) {}
-	
-	async execute() {
-		const res = await this.repoSettings.findOne();
+  constructor(readonly repoSettings: RepoSettings) {}
 
-		if (!res) {
-			throw new ExceptionConflictResource('Синхронизация между ботом и чатом отсутсвует');
-		}
+  async execute() {
+    const res = await this.repoSettings.findOne();
 
-		return await this.repoSettings.removeSettings();
-	}
+    if (!res) {
+      throw new ExceptionConflictResource(
+        'Синхронизация между ботом и чатом отсутсвует',
+      );
+    }
+
+    return await this.repoSettings.removeSettings();
+  }
 }

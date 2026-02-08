@@ -1,30 +1,29 @@
-import { Injectable } from "@nestjs/common";
-import { getRandomIndexByList } from "@tb-common/utils/сalc/randomIndexByList.util";
-import { RepoTone } from "@tb-core/prisma/repo/tone/tone.repo";
-import { RepoToneSettings } from "@tb-core/prisma/repo/tone/toneSettings.repo";
-
+import {Injectable} from '@nestjs/common';
+import {getRandomIndexByList} from '@tb-common/utils/сalc/randomIndexByList.util';
+import {RepoTone} from '@tb-core/prisma/repo/tone/tone.repo';
+import {RepoToneSettings} from '@tb-core/prisma/repo/tone/toneSettings.repo';
 
 @Injectable()
 export class StrategySetRandomToneMode {
-	constructor(
-		readonly repoTone: RepoTone,
-		readonly repoToneSettings: RepoToneSettings,
-	) {}
-	
-	async execute() {
-		const listTone = await this.repoTone.findAll();
-		const randomTone = listTone[getRandomIndexByList(listTone)];
+  constructor(
+    readonly repoTone: RepoTone,
+    readonly repoToneSettings: RepoToneSettings,
+  ) {}
 
-		if (!randomTone) {
-			throw new Error('No tones found');
-		}
+  async execute() {
+    const listTone = await this.repoTone.findAll();
+    const randomTone = listTone[getRandomIndexByList(listTone)];
 
-		await this.repoToneSettings.update({
-			tone: {
-				connect: { id: randomTone.id },
-			},
-		});
+    if (!randomTone) {
+      throw new Error('No tones found');
+    }
 
-		return randomTone;
-	}
+    await this.repoToneSettings.update({
+      tone: {
+        connect: {id: randomTone.id},
+      },
+    });
+
+    return randomTone;
+  }
 }

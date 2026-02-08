@@ -1,6 +1,11 @@
+import {
+  IDescCommandUpdate,
+  TListDescUpdate,
+} from '@tb-bot/types/descUpdates.types';
+
 export const COMMANDS_BOT_VPN = {
-	add_new_tone_mode: {
-		command: 'add_new_tone_mode',
-		desc: 'Добавить новый тон',
-	},
-};
+  add_new_tone_mode: {
+    command: 'add_new_tone_mode',
+    desc: 'Добавить новый тон',
+  },
+} satisfies TListDescUpdate<IDescCommandUpdate>;

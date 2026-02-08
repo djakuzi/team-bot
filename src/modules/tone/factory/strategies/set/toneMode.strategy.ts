@@ -1,30 +1,29 @@
-import { Injectable } from "@nestjs/common";
-import { RepoTone } from "@tb-core/prisma/repo/tone/tone.repo";
-import { RepoToneSettings } from "@tb-core/prisma/repo/tone/toneSettings.repo";
-
+import {Injectable} from '@nestjs/common';
+import {RepoTone} from '@tb-core/prisma/repo/tone/tone.repo';
+import {RepoToneSettings} from '@tb-core/prisma/repo/tone/toneSettings.repo';
 
 @Injectable()
 export class StrategySetToneMode {
-	constructor(
-		readonly repoTone: RepoTone,
-		readonly repoToneSettings: RepoToneSettings,
-	) {}
-	
-	async execute(name: string) {
-		if (!name) {
-			throw new Error('Не передано название тона');
-		}
+  constructor(
+    readonly repoTone: RepoTone,
+    readonly repoToneSettings: RepoToneSettings,
+  ) {}
 
-		const listTone = await this.repoTone.findByName(name);
+  async execute(name: string) {
+    if (!name) {
+      throw new Error('Не передано название тона');
+    }
 
-		if (!listTone) {
-			throw new Error('Данный тон не найден: ' + name);
-		}
+    const listTone = await this.repoTone.findByName(name);
 
-		return await this.repoToneSettings.update({
-			tone: {
-				connect: { id: listTone.id },
-			},
-		});
-	}
+    if (!listTone) {
+      throw new Error('Данный тон не найден: ' + name);
+    }
+
+    return await this.repoToneSettings.update({
+      tone: {
+        connect: {id: listTone.id},
+      },
+    });
+  }
 }

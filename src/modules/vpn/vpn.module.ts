@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import {Module} from '@nestjs/common';
 
 @Module({})
-export class ModuleVpn { }
+export class ModuleVpn {}

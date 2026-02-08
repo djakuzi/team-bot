@@ -1,6 +1,6 @@
-import { TypeMessage } from "./message.type";
+import {TypeMessage} from './message.type';
 
 export type TypeFilterMessage = Partial<TypeMessage> & {
-	from?: Date;
-	to?: Date;
+  from?: Date;
+  to?: Date;
 };

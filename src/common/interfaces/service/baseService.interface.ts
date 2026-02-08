@@ -1,5 +1,5 @@
-export interface  BaseService {
-	key: {
-		cache?: string,
-	}
-} 
+export interface BaseService {
+  key: {
+    cache?: string;
+  };
+}

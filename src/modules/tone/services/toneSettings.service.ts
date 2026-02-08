@@ -1,45 +1,44 @@
-import { Injectable } from "@nestjs/common";
-import { FactoryGetTone } from "../factory/get.factory";
-import { FactorySetTone } from "../factory/set.factory";
+import {Injectable} from '@nestjs/common';
+import {FactoryGetTone} from '../factory/get.factory';
+import {FactorySetTone} from '../factory/set.factory';
 
 @Injectable()
 export class ServiceToneSettings {
-	constructor(
-		private readonly factoryGetTone: FactoryGetTone,
-		private readonly factorySetTone: FactorySetTone,
-	) {
-	}
+  constructor(
+    private readonly factoryGetTone: FactoryGetTone,
+    private readonly factorySetTone: FactorySetTone,
+  ) {}
 
-	async setUpdatedToneTime(time: string) {
-		const strategy = this.factorySetTone.getStrategy('updatedTimeMode');
-		const result = await strategy.execute(time);
-	
-		return result;
-	}
+  async setUpdatedToneTime(time: string) {
+    const strategy = this.factorySetTone.getStrategy('updatedTimeMode');
+    const result = await strategy.execute(time);
 
-	async setRandomTone() {
-		const strategy = this.factorySetTone.getStrategy('randomMode');
-		const result = await strategy.execute();
+    return result;
+  }
 
-		return result;
-	}
+  async setRandomTone() {
+    const strategy = this.factorySetTone.getStrategy('randomMode');
+    const result = await strategy.execute();
 
-	async setToneModeByName(name: string) {
-		const strategy = this.factorySetTone.getStrategy('toneMode');
-		return await strategy.execute(name)
-	}
+    return result;
+  }
 
-	async getToneTime() {
-		const strategy = this.factoryGetTone.getStrategy('settingsTone');
-		const res = await strategy.execute()
+  async setToneModeByName(name: string) {
+    const strategy = this.factorySetTone.getStrategy('toneMode');
+    return await strategy.execute(name);
+  }
 
-		return res?.updateTime;
-	}
+  async getToneTime() {
+    const strategy = this.factoryGetTone.getStrategy('settingsTone');
+    const res = await strategy.execute();
 
-	async getCurrnetTone() {
-		const strategy = this.factoryGetTone.getStrategy('getCurrentTone');
-		const result = await strategy.execute();
+    return res?.updateTime;
+  }
 
-		return result;
-	}
+  async getCurrnetTone() {
+    const strategy = this.factoryGetTone.getStrategy('getCurrentTone');
+    const result = await strategy.execute();
+
+    return result;
+  }
 }

@@ -1,23 +1,23 @@
-import { Injectable } from "@nestjs/common";
-import { StrategyGetSettings } from "./strategies/get/getSettings.strategy";
+import {Injectable} from '@nestjs/common';
+import {StrategyGetSettings} from './strategies/get/getSettings.strategy';
 
 interface IStrategiesFabricGet {
-	getSettings: StrategyGetSettings,
+  getSettings: StrategyGetSettings;
 }
 
 @Injectable()
 export class FactoryGetSettings {
-	private readonly strategies: IStrategiesFabricGet;
+  private readonly strategies: IStrategiesFabricGet;
 
-	constructor(
-		private readonly getSettings: StrategyGetSettings,
-	) {
-		this.strategies = {
-			getSettings: getSettings,
-		};
-	}
+  constructor(private readonly getSettings: StrategyGetSettings) {
+    this.strategies = {
+      getSettings: getSettings,
+    };
+  }
 
-	getStrategy<K extends keyof IStrategiesFabricGet>(name: K): IStrategiesFabricGet[K] {
-		return this.strategies[name];
-	}
+  getStrategy<K extends keyof IStrategiesFabricGet>(
+    name: K,
+  ): IStrategiesFabricGet[K] {
+    return this.strategies[name];
+  }
 }

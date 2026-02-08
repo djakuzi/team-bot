@@ -1,1 +1,1 @@
-export type TypeFormatTime = 'hh:mm'
+export type TypeFormatTime = 'hh:mm';

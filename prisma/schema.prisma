@@ -8,35 +8,35 @@ datasource db {
 }
 
 model Settings {
-    id          Int      @id @default(autoincrement())
-    connectedIdChat     BigInt      @unique
+    id              Int    @id @default(autoincrement())
+    connectedIdChat BigInt @unique
 }
 
 model Tone {
-    id        Int          @id @default(autoincrement())
-    name      String       @unique
-    desc      String
-    settings  ToneSettings?
+    id       Int           @id @default(autoincrement())
+    name     String        @unique
+    desc     String
+    settings ToneSettings?
 }
 
 model ToneSettings {
-    id          Int      @id @default(autoincrement())
-    toneId      Int      @unique
-    updateTime  String?  // например "09:00"
-    tone        Tone     @relation(fields: [toneId], references: [id])
+    id         Int     @id @default(autoincrement())
+    toneId     Int     @unique
+    updateTime String? // например "09:00"
+    tone       Tone    @relation(fields: [toneId], references: [id])
 }
 
 model MessageSettings {
-	id          Int      @id @default(autoincrement())
-	updateTime  String? // например "09:00"
+    id         Int     @id @default(autoincrement())
+    updateTime String? // например "09:00"
 }
 
 model Reminder {
-    id          Int      @id @default(autoincrement())
-    name        String
-    desc        String
-    repeat      Boolean
-    reapetRangeDays   Int
-    executedAt DateTime  @default(now())
-    lastExecutedAt DateTime?
+    id              Int       @id @default(autoincrement()) // ID напоминания
+    name            String    // Название напоминания
+    desc            String    // Описание напоминания
+    repeat          Boolean   // Повторять ли напоминание
+    repeatRangeDays Int?      // Диапазон напоминания (в днях)
+    executedAt      DateTime  @default(now()) // Дата выполнения
+    lastExecutedAt  DateTime? // Последняя дата выполнения
 }

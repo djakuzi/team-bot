@@ -1,25 +1,22 @@
-import { Injectable } from '@nestjs/common';
-import type { Settings } from '@prisma/client';
-import { ServicePrisma } from '@tb-core/prisma/prisma.service';
+import {Injectable} from '@nestjs/common';
+import type {Settings} from '@prisma/client';
+import {ServicePrisma} from '@tb-core/prisma/prisma.service';
 
 @Injectable()
 export class RepoSettings {
-	constructor(private readonly prisma: ServicePrisma) { }
+  constructor(private readonly prisma: ServicePrisma) {}
 
-	async createSettings(settigns: Omit<Settings, 'id'>) {
+  async createSettings(settigns: Omit<Settings, 'id'>) {
+    return await this.prisma.settings.create({
+      data: settigns,
+    });
+  }
 
-		return await this.prisma.settings.create(
-			{ 
-				data: settigns 
-			}
-		)
-	}
+  async findOne() {
+    return this.prisma.settings.findFirst();
+  }
 
-	async findOne() {
-		return this.prisma.settings.findFirst();
-	}
-	
-	async removeSettings() {
-		return this.prisma.settings.deleteMany();
-	}
+  async removeSettings() {
+    return this.prisma.settings.deleteMany();
+  }
 }

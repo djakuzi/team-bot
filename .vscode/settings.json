@@ -1,0 +1,46 @@
+{
+  // Включаем автоформатирование при сохранении
+  "editor.formatOnSave": true,
+
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma",
+  },
+  
+  // Устанавливаем Prettier как форматтер по умолчанию
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  
+  // Указываем путь к конфигу Prettier
+  "prettier.configPath": ".prettierrc",
+  
+  // Заставляем использовать конфиг из проекта
+  "prettier.requireConfig": true,
+  
+  // Настройки для разных типов файлов
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  
+  // Убираем конфликты с другими форматтерами
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  
+  // Базовые настройки редактора
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true
+}

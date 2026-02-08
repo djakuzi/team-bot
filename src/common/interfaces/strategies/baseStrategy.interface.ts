@@ -1,4 +1,3 @@
 export interface IStrategy<TInput = void, TResult = any> {
-	execute(input: TInput): Promise<TResult>;
+  execute(input: TInput): Promise<TResult>;
 }
-
