@@ -33,10 +33,10 @@ model MessageSettings {
 
 model Reminder {
     id              Int       @id @default(autoincrement()) // ID напоминания
-    name            String    // Название напоминания
-    desc            String    // Описание напоминания
-    repeat          Boolean   // Повторять ли напоминание
-    repeatRangeDays Int?      // Диапазон напоминания (в днях)
+    name            String // Название напоминания
+    desc            String // Описание напоминания
+    repeat          Boolean // Повторять ли напоминание
+    repeatRangeDays Int? // Диапазон напоминания (в днях)
     executedAt      DateTime  @default(now()) // Дата выполнения
     lastExecutedAt  DateTime? // Последняя дата выполнения
 }
