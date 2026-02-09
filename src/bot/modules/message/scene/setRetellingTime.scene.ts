@@ -25,7 +25,7 @@ export class SceneRetellingTime extends ASceneBot {
   async onCancel(@Ctx() ctx: Scenes.WizardContext) {
     await super.onCancel(
       ctx,
-      'Изменение времени генерации пересказа сообщений отменено.',
+      'Изменение времени анализа пересказа сообщений отменено.',
     );
   }
 
@@ -33,7 +33,7 @@ export class SceneRetellingTime extends ASceneBot {
   async ask(@Ctx() ctx: Scenes.WizardContext) {
     await this.cancelScene(
       ctx,
-      'Введите время генерации пересказа сообщений в формате ЧЧ:ММ (например, 14:30)',
+      'Введите время генерации анализа сообщений в формате ЧЧ:ММ (например, 14:30)',
     );
 
     ctx.wizard.next();
@@ -60,9 +60,7 @@ export class SceneRetellingTime extends ASceneBot {
       return;
     }
 
-    await ctx.reply(
-      `Время генерации пересказа сообщений установлено на ${time}`,
-    );
+    await ctx.reply(`Время генерации анализа сообщений установлено на ${time}`);
     await ctx.scene.leave();
   }
 }

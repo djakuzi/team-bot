@@ -13,6 +13,9 @@ import {getRetellingMessages} from './action/getRetellingMessages.action';
 import {ServiceMessageAi} from '@tb-modules/message/services/messageAi.service';
 import {getCommands} from '@tb-bot/updates/action/getCommands.action';
 import {COMMANDS_BOT_MESSAGE} from '../constant/commands.const';
+import {setPromt} from './action/setPromt.action';
+import {getPromt} from './action/getPromt.action';
+import {removePromt} from './action/removePromt.action';
 
 @Update()
 export class ActionsBotMessage {
@@ -43,6 +46,11 @@ export class ActionsBotMessage {
     await ctx.scene.enter('set_retelling_time');
   }
 
+  @Action(ACTIONS_BOT_MESSAGE.setPromt.action)
+  async setPromt(@Ctx() ctx: Context) {
+    await setPromt(ctx, this.serviceMessageSettings, 'action');
+  }
+
   @Action(ACTIONS_BOT_MESSAGE.getMessageToday.action)
   async connectThisChat(@Ctx() ctx: Context) {
     await getMessagesToday(ctx, this.serviceMessage, 'action');
@@ -58,18 +66,28 @@ export class ActionsBotMessage {
     await getSizeMemory(ctx, this.serviceMessage, 'action');
   }
 
-  @Action(ACTIONS_BOT_MESSAGE.clearMessage.action)
-  async removeAllMemory(@Ctx() ctx: Context) {
-    await removeAllMemory(ctx, this.serviceMessage, 'action');
-  }
-
   @Action(ACTIONS_BOT_MESSAGE.getTimeRetellingMessage.action)
   async getTimeRetellingMessage(@Ctx() ctx: Context) {
     await getTimeRetellingMessage(ctx, this.serviceMessageSettings, 'action');
   }
 
+  @Action(ACTIONS_BOT_MESSAGE.getPromt.action)
+  async getPromt(@Ctx() ctx: Context) {
+    await getPromt(ctx, this.serviceMessageSettings, 'action');
+  }
+
   @Action(ACTIONS_BOT_MESSAGE.commands.action)
   async getMessageCommands(@Ctx() ctx: Context) {
     await getCommands(ctx, 'action', COMMANDS_BOT_MESSAGE, ACTIONS_BOT_MESSAGE);
+  }
+
+  @Action(ACTIONS_BOT_MESSAGE.clearMessage.action)
+  async removeAllMemory(@Ctx() ctx: Context) {
+    await removeAllMemory(ctx, this.serviceMessage, 'action');
+  }
+
+  @Action(ACTIONS_BOT_MESSAGE.removePromt.action)
+  async removePromt(@Ctx() ctx: Context) {
+    await removePromt(ctx, this.serviceMessageSettings, 'action');
   }
 }

@@ -32,6 +32,18 @@ export const ACTIONS_BOT_MESSAGE = {
     action: 'set_retelling_time',
     desc: 'Изменить время анализа',
   },
+  setPromt: {
+    action: 'set_retelling_promt',
+    desc: 'Установить промт анализа',
+  },
+  getPromt: {
+    action: 'get_retelling_promt',
+    desc: 'Текущий промт анализа',
+  },
+  removePromt: {
+    action: 'remove_retelling_promt',
+    desc: 'Удалить промт анализа',
+  },
   commands: {
     action: 'get_message_commands',
     desc: '📝 Команды',

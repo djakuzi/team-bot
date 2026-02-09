@@ -13,6 +13,7 @@ import {ServiceReminder} from './services/reminder.service';
 import {HandlerReminderAdded} from './listener/handlers/reminderAdded.handler';
 import {StrategyDeleteAllReminders} from './factory/strategies/delete/allReminders.strategy';
 import {FactoryDeleteReminder} from './factory/delete.factory';
+import {HandlerRemoveReminderAll} from './listener/handlers/removeReminderAll.handler';
 
 export const SCHEME_REMINDER: ISceneProvider = {
   services: [ServiceReminder],
@@ -29,7 +30,11 @@ export const SCHEME_REMINDER: ISceneProvider = {
     StrategyChangeDataReminder,
     StrategyDeleteAllReminders,
   ],
-  handler: [HandlerReminderChanged, HandlerReminderAdded],
+  handler: [
+    HandlerReminderChanged,
+    HandlerReminderAdded,
+    HandlerRemoveReminderAll,
+  ],
   listener: [ListenerReminder],
   cron: [CronReminderExecute],
 };

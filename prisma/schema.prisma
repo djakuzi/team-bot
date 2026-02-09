@@ -29,6 +29,7 @@ model ToneSettings {
 model MessageSettings {
     id         Int     @id @default(autoincrement())
     updateTime String? // например "09:00"
+    promt      String?
 }
 
 model Reminder {
