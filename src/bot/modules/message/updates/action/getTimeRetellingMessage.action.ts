@@ -19,7 +19,7 @@ export async function getTimeRetellingMessage(
 
   const message = time
     ? `Пересказ сообщений происходит в ${time}`
-    : `не установлено`;
+    : `Не установлено`;
 
   if (isAction) {
     await ctx.editMessageText(message, {

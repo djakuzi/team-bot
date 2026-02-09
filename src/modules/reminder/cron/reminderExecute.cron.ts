@@ -170,4 +170,16 @@ export class CronReminderExecute implements OnModuleInit {
   async deleteScheduledReminder(reminderId: number) {
     await this.stopScheduledReminder(reminderId);
   }
+
+  async deleteAllScheduledReminders(): Promise<void> {
+    if (!this.listCurrentJob?.size) return;
+
+    this.listCurrentJob.forEach(job => {
+      if (!job) return;
+      job.stop();
+    });
+
+    this.logger.log(`Удалено ${this.listCurrentJob.size} задач`);
+    this.listCurrentJob.clear();
+  }
 }

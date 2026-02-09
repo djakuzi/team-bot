@@ -20,6 +20,18 @@ export const COMMANDS_BOT_MESSAGE = {
     command: 'clear_messages',
     desc: 'Очистить сообщения',
   },
+  setPromt: {
+    command: 'set_retelling_promt',
+    desc: 'Установить промт анализа',
+  },
+  getPromt: {
+    command: 'get_retelling_promt',
+    desc: 'Текущий промт анализа',
+  },
+  removePromt: {
+    command: 'remove_retelling_promt',
+    desc: 'Удалить промт анализа',
+  },
   setRetellingTime: {
     command: 'set_retelling_time',
     desc: 'Изменить время генерации пересказа',

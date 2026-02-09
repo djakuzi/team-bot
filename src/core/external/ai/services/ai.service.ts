@@ -6,10 +6,6 @@ import {IConfigAi} from '@tb-core/config/configs/app.config';
 @Injectable()
 export class ServiceAi {
   private readonly openRouter: OpenRouter;
-  private readonly config = {
-    model: 'qwen/qwen3-coder:free',
-    stream: true,
-  };
 
   constructor(private configService: ConfigService) {
     const aiConfig = this.configService.get<IConfigAi>('ai');
@@ -28,7 +24,7 @@ export class ServiceAi {
     if (!promt) return;
 
     const stream = await this.openRouter.chat.send({
-      model: 'nvidia/nemotron-nano-9b-v2:free',
+      model: 'tngtech/deepseek-r1t2-chimera:free',
       messages: [
         {
           role: 'user',

@@ -7,5 +7,8 @@ NODE_PORT = '6666'
 #DATABASE
 DATABASE_URL="file:./dev.db"
 
+#TIMEZONE
+TZ = "Europe/Moscow"
+
 #AI
 AI_API_TOKEN = 'sk-or-v1-a6cf49f02d0ceb4feac5793e4aaf7dfd9330930efb5e7c8e1bbcb11ae7ccf99a4332423423'
