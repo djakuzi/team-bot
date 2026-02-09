@@ -13,7 +13,6 @@ import {getRetellingMessages} from './action/getRetellingMessages.action';
 import {ServiceMessageAi} from '@tb-modules/message/services/messageAi.service';
 import {getCommands} from '@tb-bot/updates/action/getCommands.action';
 import {COMMANDS_BOT_MESSAGE} from '../constant/commands.const';
-import {setPromt} from './action/setPromt.action';
 import {getPromt} from './action/getPromt.action';
 import {removePromt} from './action/removePromt.action';
 
@@ -47,8 +46,8 @@ export class ActionsBotMessage {
   }
 
   @Action(ACTIONS_BOT_MESSAGE.setPromt.action)
-  async setPromt(@Ctx() ctx: Context) {
-    await setPromt(ctx, this.serviceMessageSettings, 'action');
+  async setPromt(@Ctx() ctx: Scenes.WizardContext) {
+    await ctx.scene.enter('set_retelling_promt');
   }
 
   @Action(ACTIONS_BOT_MESSAGE.getMessageToday.action)

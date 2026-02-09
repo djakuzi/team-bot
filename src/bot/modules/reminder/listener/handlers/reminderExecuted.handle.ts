@@ -16,7 +16,7 @@ export class HandlerReminderExecuted {
     const {reminder} = payload;
 
     const message = `
-        *Нпоминание*: ${reminder.name}. 
+        *Напоминание*: ${reminder.name}. 
         \n${reminder.name}`;
 
     await this.bot.telegram.sendMessage(id.connectedIdChat + '', message, {

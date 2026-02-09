@@ -1,5 +1,5 @@
 import {Command, Ctx, Update} from 'nestjs-telegraf';
-import {Context} from 'telegraf';
+import {Context, Scenes} from 'telegraf';
 import {COMMANDS_BOT_MESSAGE} from '../constant/commands.const';
 import {getMessagesToday} from './action/getMessagesToday.action';
 import {ServiceMessage} from '@tb-modules/message/services/message.service';
@@ -9,7 +9,6 @@ import {getRetellingMessages} from './action/getRetellingMessages.action';
 import {ServiceMessageAi} from '@tb-modules/message/services/messageAi.service';
 import {getPromt} from './action/getPromt.action';
 import {removePromt} from './action/removePromt.action';
-import {setPromt} from './action/setPromt.action';
 
 @Update()
 export class CommandsBotMessage {
@@ -47,8 +46,8 @@ export class CommandsBotMessage {
   }
 
   @Command(COMMANDS_BOT_MESSAGE.setPromt.command)
-  async setPromt(@Ctx() ctx: Context) {
-    await setPromt(ctx, this.serviceMessageSettings, 'action');
+  async setPromt(@Ctx() ctx: Scenes.WizardContext) {
+    await ctx.scene.enter('set_retelling_promt');
   }
 
   @Command(COMMANDS_BOT_MESSAGE.removePromt.command)

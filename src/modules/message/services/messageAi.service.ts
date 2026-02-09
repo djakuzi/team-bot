@@ -42,8 +42,7 @@ export class ServiceMessageAi {
             ${messages}
             ---
 
-            Сделай пересказ с Markdown-разметкой, то есть если надо что-то выделить *текст* для Telegram.
-            Максимальная длина ответа — 4096 символов.
+            Максимальная длина анализа — 4096 символов.
         `;
 
     const retelling = await this.serviceAi.generateText(resPrompt);
