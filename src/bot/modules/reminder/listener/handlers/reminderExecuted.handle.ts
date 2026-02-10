@@ -17,7 +17,7 @@ export class HandlerReminderExecuted {
 
     const message = `
         *Напоминание*: ${reminder.name}. 
-        \n${reminder.name}`;
+        \n${reminder.desc}`;
 
     await this.bot.telegram.sendMessage(id.connectedIdChat + '', message, {
       parse_mode: 'Markdown',
