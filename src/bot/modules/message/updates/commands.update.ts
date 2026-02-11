@@ -9,6 +9,8 @@ import {getRetellingMessages} from './action/getRetellingMessages.action';
 import {ServiceMessageAi} from '@tb-modules/message/services/messageAi.service';
 import {getPromt} from './action/getPromt.action';
 import {removePromt} from './action/removePromt.action';
+import {getSizeMemory} from './action/getSizeMemory.action';
+import {removeAllMemory} from './action/removeAllMemory.action';
 
 @Update()
 export class CommandsBotMessage {
@@ -33,6 +35,11 @@ export class CommandsBotMessage {
     await getPromt(ctx, this.serviceMessageSettings, 'command');
   }
 
+  @Command(COMMANDS_BOT_MESSAGE.getMemory.command)
+  async getMemoryStorage(@Ctx() ctx: Context) {
+    await getSizeMemory(ctx, this.serviceMessage, 'command');
+  }
+
   @Command(COMMANDS_BOT_MESSAGE.setRetellingTime.command)
   async addNewToneTime(@Ctx() ctx: Context) {
     const message = getTextMessage(ctx, true);
@@ -53,5 +60,10 @@ export class CommandsBotMessage {
   @Command(COMMANDS_BOT_MESSAGE.removePromt.command)
   async removePromt(@Ctx() ctx: Context) {
     await removePromt(ctx, this.serviceMessageSettings, 'command');
+  }
+
+  @Command(COMMANDS_BOT_MESSAGE.clear.command)
+  async removeAllMemory(@Ctx() ctx: Context) {
+    await removeAllMemory(ctx, this.serviceMessage, 'command');
   }
 }

@@ -34,6 +34,8 @@ export async function getRetellingMessages(
   }
 
   if (isCommand) {
-    await ctx.reply(message);
+    await ctx.reply(message, {
+      parse_mode: 'Markdown',
+    });
   }
 }
