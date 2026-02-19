@@ -16,6 +16,7 @@ import {ModuleBotReminder} from './modules/reminder/botReminder.module';
 import {ServiceBotCalendar} from './services/calendar.service';
 import {ModuleBotPanel} from './modules/panel/botPanel.module';
 import {BotCommandsService} from './bot.service';
+import {ModuleBotAi} from './modules/ai/botAi.module';
 
 @Global()
 @Module({
@@ -38,6 +39,7 @@ import {BotCommandsService} from './bot.service';
     ModuleBotMessage,
     ModuleBotReminder,
     ModuleBotPanel,
+    ModuleBotAi,
   ],
   providers: [
     {
