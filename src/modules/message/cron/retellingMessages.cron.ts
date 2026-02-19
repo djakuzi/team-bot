@@ -62,7 +62,7 @@ export class CronRetellingMessages implements OnModuleInit {
 
     this.eventEmitter.emit(
       EventMessageRetellingGenerated.eventName,
-      new EventMessageRetellingGenerated(retelling, {isCron: true}),
+      new EventMessageRetellingGenerated(retelling.text, {isCron: true}),
     );
 
     this.logger.log(

@@ -15,9 +15,9 @@ export class ServiceMessageSettings {
     private readonly factoryRemoveMessage: FactoryRemoveMessage,
   ) {}
 
-  async setPromt(promt: string) {
-    const strategy = this.factorySetMessage.getStrategy('setPromtRetelling');
-    const result = await strategy.execute(promt);
+  async setPrompt(prompt: string) {
+    const strategy = this.factorySetMessage.getStrategy('setPromptRetelling');
+    const result = await strategy.execute(prompt);
 
     return result;
   }
@@ -36,17 +36,17 @@ export class ServiceMessageSettings {
     return res?.updateTime;
   }
 
-  async getPromt() {
+  async getPrompt() {
     const strategy = this.factoryGetMessage.getStrategy('getSettingsMessages');
     const res = await strategy.execute();
 
-    return res?.promt;
+    return res?.prompt;
   }
 
-  async removePromt() {
-    const strategy = this.factoryRemoveMessage.getStrategy('removePromt');
+  async removePrompt() {
+    const strategy = this.factoryRemoveMessage.getStrategy('removePrompt');
     const res = await strategy.execute();
 
-    return res?.promt;
+    return res?.prompt;
   }
 }

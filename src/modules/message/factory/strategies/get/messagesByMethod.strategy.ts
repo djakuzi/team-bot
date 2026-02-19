@@ -22,7 +22,16 @@ export class StrategyGetMessagesByMethod {
     arg: IArgsGetMessageByDate<T>,
   ): Promise<ResultByType<T> | null> {
     if (arg.method === 'today') {
-      const messages = await this.repoMessage.getMessages();
+      const startOfDay = new Date();
+      startOfDay.setHours(0, 0, 0, 0);
+
+      const endOfDay = new Date();
+      endOfDay.setHours(23, 59, 59, 999);
+
+      const messages = await this.repoMessage.getMessages({
+        from: startOfDay,
+        to: endOfDay,
+      });
 
       if (!messages.length) {
         return null;
