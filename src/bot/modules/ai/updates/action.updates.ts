@@ -11,7 +11,7 @@ import {getLastUsedModels} from './action/getLastUsedModels.action';
 import {getListModels} from './action/getListModels.action';
 
 @Update()
-export class ActionsBotMessage {
+export class ActionsBotAi {
   constructor(private readonly serviceAi: ServiceAi) {}
 
   @Action(ACTIONS_BOT_AI.menu.action)

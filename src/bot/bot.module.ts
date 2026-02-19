@@ -36,10 +36,10 @@ import {ModuleBotAi} from './modules/ai/botAi.module';
     ModuleBotTone,
     ModuleBotSettings,
     ModuleBotVpn,
-    ModuleBotMessage,
     ModuleBotReminder,
     ModuleBotPanel,
     ModuleBotAi,
+    ModuleBotMessage,
   ],
   providers: [
     {
