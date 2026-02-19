@@ -17,8 +17,8 @@ import {StrategySetTimeRetelling} from './factory/strategies/set/timeRetelling.s
 import {StrategyGetSettingsMessages} from './factory/strategies/get/messageSettings.strategy';
 import {ListenerMessages} from './listener/messages.listener';
 import {HandlerMessageTimeRetellingChanged} from './listener/handlers/changeTimeRetelling.handler';
-import {StrategyRemovePromt} from './factory/strategies/remove/removePromt.strategy';
-import {StrategySetPromtRetelling} from './factory/strategies/set/timeRetelling.strategy copy';
+import {StrategySetPromptRetelling} from './factory/strategies/set/promptRetelling.strategy';
+import {StrategyRemovePrompt} from './factory/strategies/remove/removePromt.strategy';
 
 export const SCHEME_MESSAGE: ISceneProvider = {
   services: [ServiceMessage, ServiceMessageAi, ServiceMessageSettings],
@@ -31,12 +31,12 @@ export const SCHEME_MESSAGE: ISceneProvider = {
   strategies: [
     StrategyAddMessage,
     StrategyRemoveAllMessage,
-    StrategyRemovePromt,
+    StrategyRemovePrompt,
     StrategyGetlMemoryStorage,
     StrategyGetMessagesByMethod,
     StrategyGetSettingsMessages,
     StrategySetTimeRetelling,
-    StrategySetPromtRetelling,
+    StrategySetPromptRetelling,
   ],
   handler: [HandlerMessageTimeRetellingChanged],
   listener: [ListenerMessages],

@@ -2,20 +2,20 @@ import {Injectable} from '@nestjs/common';
 import {RepoMessageSettings} from '@tb-core/prisma/repo/message/messageSettings.tepo';
 
 @Injectable()
-export class StrategyRemovePromt {
+export class StrategyRemovePrompt {
   constructor(private readonly repoMessageSettings: RepoMessageSettings) {}
 
   async execute() {
     const result = await this.repoMessageSettings.update({
-      promt: null,
+      prompt: null,
     });
 
-    if (!result.promt) {
+    if (!result.prompt) {
       throw new Error('Не удалось удалить промт для анализа сообщений');
     }
 
     return {
-      promt: result.promt,
+      prompt: result.prompt,
     };
   }
 }

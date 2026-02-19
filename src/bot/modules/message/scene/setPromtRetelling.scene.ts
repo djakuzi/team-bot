@@ -7,8 +7,8 @@ import {buildCancelScene} from '@tb-bot/utils/scene/buildCancelScene.util';
 import {HANDLERS_BOT_MESSAGE} from '../constant/handlers.const';
 import {ServiceMessageSettings} from '@tb-modules/message/services/messageSettings.service';
 
-@Wizard('set_retelling_promt')
-export class SceneRetellingPromt extends ASceneBot {
+@Wizard('set_retelling_prompt')
+export class SceneRetellingPrompt extends ASceneBot {
   cancelScene = async (ctx: Scenes.WizardContext, message: string) => {
     await buildCancelScene(
       ctx,
@@ -49,7 +49,7 @@ export class SceneRetellingPromt extends ASceneBot {
     }
 
     try {
-      await this.serviceMessageSettings.setPromt(text);
+      await this.serviceMessageSettings.setPrompt(text);
     } catch (error) {
       const resError = parseExceptionMessage(error);
 

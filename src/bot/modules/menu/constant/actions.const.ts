@@ -1,3 +1,4 @@
+import {ACTIONS_BOT_AI} from '@tb-bot/modules/ai/constant/actions.const';
 import {ACTIONS_BOT_MESSAGE} from '@tb-bot/modules/message/constant/actions.const';
 import {ACTIONS_BOT_PANEL} from '@tb-bot/modules/panel/constant/actions.const';
 import {ACTIONS_BOT_REMINDER} from '@tb-bot/modules/reminder/constant/actions.const';
@@ -21,6 +22,10 @@ export const ACTIONS_BOT_MENU = {
   menuReminder: {
     action: ACTIONS_BOT_REMINDER.menu.action,
     desc: ACTIONS_BOT_REMINDER.menu.desc,
+  },
+  menuAi: {
+    action: ACTIONS_BOT_AI.menu.action,
+    desc: ACTIONS_BOT_AI.menu.desc,
   },
   menuSettings: {
     action: ACTIONS_BOT_SETTINGS.menu.action,

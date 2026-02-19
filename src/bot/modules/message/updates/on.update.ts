@@ -4,7 +4,7 @@ import {Context} from 'telegraf';
 import {OnAddMessage} from './handlers/addMessage.handler';
 
 @Update()
-export class MessageBotMessage {
+export class OnBotMessage {
   constructor(private readonly serviceMessage: ServiceMessage) {}
 
   @On('message')

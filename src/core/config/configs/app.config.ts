@@ -11,6 +11,7 @@ interface IConfigNode {
 
 export interface IConfigAi {
   token: TProccesEnv;
+  models: TProccesEnv;
 }
 
 export interface IConfigApp {
@@ -29,6 +30,7 @@ const createAppConfig = (): IConfigApp => ({
   },
   ai: {
     token: process.env.AI_API_TOKEN,
+    models: process.env.AI_MODELS,
   },
 });
 

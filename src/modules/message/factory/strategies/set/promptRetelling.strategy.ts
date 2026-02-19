@@ -2,26 +2,26 @@ import {Injectable} from '@nestjs/common';
 import {RepoMessageSettings} from '@tb-core/prisma/repo/message/messageSettings.tepo';
 
 @Injectable()
-export class StrategySetPromtRetelling {
+export class StrategySetPromptRetelling {
   constructor(private readonly repoMessageSettings: RepoMessageSettings) {}
 
-  async execute(promt: string) {
-    if (promt.length === 0) {
+  async execute(prompt: string) {
+    if (prompt.length === 0) {
       throw new Error('Промт не может быть пустым');
     }
 
     const result = await this.repoMessageSettings.update({
-      promt: promt,
+      prompt: prompt,
     });
 
-    if (!result.promt) {
+    if (!result.prompt) {
       throw new Error(
-        'Не удалось обновить промт для анализа сообщений. Промт: ' + promt,
+        'Не удалось обновить промт для анализа сообщений. Промт: ' + prompt,
       );
     }
 
     return {
-      promt: result.promt,
+      prompt: result.prompt,
     };
   }
 }

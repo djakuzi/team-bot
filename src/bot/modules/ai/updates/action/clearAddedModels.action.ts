@@ -1,11 +1,11 @@
 import {Context} from 'telegraf';
 import {TypeUpdateContext} from '@tb-bot/types/update.type';
-import {ACTIONS_BOT_MESSAGE} from '../../constant/actions.const';
-import {ServiceMessageSettings} from '@tb-modules/message/services/messageSettings.service';
+import {ACTIONS_BOT_AI} from '../../constant/actions.const';
+import {ServiceAi} from '@tb-core/external/ai/services/ai.service';
 
-export async function getPrompt(
+export async function clearAddedModels(
   ctx: Context,
-  serviceMessageSettings: ServiceMessageSettings,
+  serviceAi: ServiceAi,
   source: TypeUpdateContext,
 ) {
   const isAction = source === 'action';
@@ -15,8 +15,9 @@ export async function getPrompt(
     await ctx.answerCbQuery();
   }
 
-  const message =
-    (await serviceMessageSettings.getPrompt()) ?? 'Промт для анализа не задан';
+  serviceAi.removeAddedModels();
+
+  const message = 'Добавленные модели удалены';
 
   if (isAction) {
     await ctx.editMessageText(message, {
@@ -24,8 +25,8 @@ export async function getPrompt(
         inline_keyboard: [
           [
             {
-              text: ACTIONS_BOT_MESSAGE.menu.desc,
-              callback_data: ACTIONS_BOT_MESSAGE.menu.action,
+              text: ACTIONS_BOT_AI.menu.desc,
+              callback_data: ACTIONS_BOT_AI.menu.action,
             },
           ],
         ],

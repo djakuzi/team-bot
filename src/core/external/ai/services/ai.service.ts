@@ -1,49 +1,53 @@
 import {Injectable} from '@nestjs/common';
+import {ServiceAiModelManager} from './aiManager.service';
+import {SerivceAiTextGenerator} from './aiGeneratorText.service';
 import {ConfigService} from '@nestjs/config';
-import {OpenRouter} from '@openrouter/sdk';
 import {IConfigAi} from '@tb-core/config/configs/app.config';
+import {OpenRouter} from '@openrouter/sdk';
+import {IAiGenerationParams} from '../types/generationOptions.type';
 
 @Injectable()
 export class ServiceAi {
-  private readonly openRouter: OpenRouter;
+  private readonly modelManager: ServiceAiModelManager;
+  private readonly textGenerator: SerivceAiTextGenerator;
 
   constructor(private configService: ConfigService) {
     const aiConfig = this.configService.get<IConfigAi>('ai');
     const apiKey = aiConfig?.token;
+    const listNameModels = aiConfig?.models?.split(',').map(m => m.trim());
 
-    if (!apiKey) {
+    if (!apiKey || !listNameModels) {
       throw new Error('AI API token is missing in config');
     }
 
-    this.openRouter = new OpenRouter({
-      apiKey,
-    });
+    this.modelManager = new ServiceAiModelManager(listNameModels);
+    this.textGenerator = new SerivceAiTextGenerator(
+      new OpenRouter({apiKey}),
+      this.modelManager,
+    );
   }
 
-  async generateText(promt: string) {
-    if (!promt) return;
+  generateText(options: IAiGenerationParams) {
+    return this.textGenerator.generateText(options);
+  }
 
-    const stream = await this.openRouter.chat.send({
-      model: 'tngtech/deepseek-r1t2-chimera:free',
-      messages: [
-        {
-          role: 'user',
-          content: promt,
-        },
-      ],
-      stream: true,
-    });
+  addModel(model: string, pos: 'start' | 'end') {
+    this.modelManager.addModel(model, pos);
+  }
 
-    let response = '';
+  removeAddedModels(model?: string) {
+    this.modelManager.removeAddedModels(model);
+  }
 
-    for await (const chunk of stream) {
-      const content = chunk.choices[0]?.delta?.content;
+  getAddedModels(): string[] {
+    return this.modelManager.getAddedModels();
+  }
 
-      if (content) {
-        response += content;
-      }
-    }
+  getAllModels(): string[] {
+    return this.modelManager.getAllModels();
+  }
 
-    return response;
+  getLastSuccessfulModel() {
+    return this.modelManager.getLastSuccessfulModel();
   }
 }

@@ -13,8 +13,8 @@ import {getRetellingMessages} from './action/getRetellingMessages.action';
 import {ServiceMessageAi} from '@tb-modules/message/services/messageAi.service';
 import {getCommands} from '@tb-bot/updates/action/getCommands.action';
 import {COMMANDS_BOT_MESSAGE} from '../constant/commands.const';
-import {getPromt} from './action/getPromt.action';
-import {removePromt} from './action/removePromt.action';
+import {getPrompt} from './action/getPromt.action';
+import {removePrompt} from './action/removePromt.action';
 
 @Update()
 export class ActionsBotMessage {
@@ -45,9 +45,9 @@ export class ActionsBotMessage {
     await ctx.scene.enter('set_retelling_time');
   }
 
-  @Action(ACTIONS_BOT_MESSAGE.setPromt.action)
-  async setPromt(@Ctx() ctx: Scenes.WizardContext) {
-    await ctx.scene.enter('set_retelling_promt');
+  @Action(ACTIONS_BOT_MESSAGE.setPrompt.action)
+  async setPrompt(@Ctx() ctx: Scenes.WizardContext) {
+    await ctx.scene.enter('set_retelling_prompt');
   }
 
   @Action(ACTIONS_BOT_MESSAGE.getMessageToday.action)
@@ -70,9 +70,9 @@ export class ActionsBotMessage {
     await getTimeRetellingMessage(ctx, this.serviceMessageSettings, 'action');
   }
 
-  @Action(ACTIONS_BOT_MESSAGE.getPromt.action)
-  async getPromt(@Ctx() ctx: Context) {
-    await getPromt(ctx, this.serviceMessageSettings, 'action');
+  @Action(ACTIONS_BOT_MESSAGE.getPrompt.action)
+  async getPrompt(@Ctx() ctx: Context) {
+    await getPrompt(ctx, this.serviceMessageSettings, 'action');
   }
 
   @Action(ACTIONS_BOT_MESSAGE.commands.action)
@@ -85,8 +85,8 @@ export class ActionsBotMessage {
     await removeAllMemory(ctx, this.serviceMessage, 'action');
   }
 
-  @Action(ACTIONS_BOT_MESSAGE.removePromt.action)
-  async removePromt(@Ctx() ctx: Context) {
-    await removePromt(ctx, this.serviceMessageSettings, 'action');
+  @Action(ACTIONS_BOT_MESSAGE.removePrompt.action)
+  async removePrompt(@Ctx() ctx: Context) {
+    await removePrompt(ctx, this.serviceMessageSettings, 'action');
   }
 }

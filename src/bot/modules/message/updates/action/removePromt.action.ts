@@ -3,7 +3,7 @@ import {TypeUpdateContext} from '@tb-bot/types/update.type';
 import {ACTIONS_BOT_MESSAGE} from '../../constant/actions.const';
 import {ServiceMessageSettings} from '@tb-modules/message/services/messageSettings.service';
 
-export async function removePromt(
+export async function removePrompt(
   ctx: Context,
   serviceMessageSettings: ServiceMessageSettings,
   source: TypeUpdateContext,
@@ -15,7 +15,7 @@ export async function removePromt(
     await ctx.answerCbQuery();
   }
 
-  await serviceMessageSettings.removePromt();
+  await serviceMessageSettings.removePrompt();
   const message = 'Промт для анализа удален';
 
   if (isAction) {

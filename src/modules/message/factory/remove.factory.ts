@@ -1,10 +1,10 @@
 import {Injectable} from '@nestjs/common';
 import {StrategyRemoveAllMessage} from './strategies/remove/removeAllMessages.strategy';
-import {StrategyRemovePromt} from './strategies/remove/removePromt.strategy';
+import {StrategyRemovePrompt} from './strategies/remove/removePromt.strategy';
 
 interface IStrategiesFabricRemove {
   removeAllMessage: StrategyRemoveAllMessage;
-  removePromt: StrategyRemovePromt;
+  removePrompt: StrategyRemovePrompt;
 }
 
 @Injectable()
@@ -13,11 +13,11 @@ export class FactoryRemoveMessage {
 
   constructor(
     private readonly removeAllMessage: StrategyRemoveAllMessage,
-    private readonly removePromt: StrategyRemovePromt,
+    private readonly removePrompt: StrategyRemovePrompt,
   ) {
     this.strategies = {
       removeAllMessage: removeAllMessage,
-      removePromt: removePromt,
+      removePrompt: removePrompt,
     };
   }
 
