@@ -25,11 +25,7 @@ export class HandleGenerateRetellingMessages {
     const partsRetelling = splitTextByMaxSymbol(retelling);
 
     for (const part of partsRetelling) {
-      const escaped = TransformMarkdown.parseEscapeMarkdownV2(part);
-
-      await this.bot.telegram.sendMessage(id.connectedIdChat + '', escaped, {
-        parse_mode: 'MarkdownV2',
-      });
+      await this.bot.telegram.sendMessage(id.connectedIdChat + '', part);
     }
   }
 
