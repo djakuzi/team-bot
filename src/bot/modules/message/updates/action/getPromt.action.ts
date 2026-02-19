@@ -3,7 +3,7 @@ import {TypeUpdateContext} from '@tb-bot/types/update.type';
 import {ACTIONS_BOT_MESSAGE} from '../../constant/actions.const';
 import {ServiceMessageSettings} from '@tb-modules/message/services/messageSettings.service';
 
-export async function getPromt(
+export async function getPrompt(
   ctx: Context,
   serviceMessageSettings: ServiceMessageSettings,
   source: TypeUpdateContext,
@@ -16,7 +16,7 @@ export async function getPromt(
   }
 
   const message =
-    (await serviceMessageSettings.getPromt()) ?? 'Промт для анализа не задан';
+    (await serviceMessageSettings.getPrompt()) ?? 'Промт для анализа не задан';
 
   if (isAction) {
     await ctx.editMessageText(message, {

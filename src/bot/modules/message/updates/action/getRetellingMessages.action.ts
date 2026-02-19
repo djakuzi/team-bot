@@ -18,7 +18,7 @@ export async function getRetellingMessages(
   const message = await serviceMessageAi.getRetellingMessages();
 
   if (isAction) {
-    await ctx.editMessageText(message, {
+    await ctx.editMessageText(message.text, {
       parse_mode: 'Markdown',
       reply_markup: {
         inline_keyboard: [
@@ -34,7 +34,7 @@ export async function getRetellingMessages(
   }
 
   if (isCommand) {
-    await ctx.reply(message, {
+    await ctx.reply(message.text, {
       parse_mode: 'Markdown',
     });
   }

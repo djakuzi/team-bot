@@ -7,10 +7,10 @@ import {getTextMessage} from '@tb-bot/utils/context/getTextMessage.util';
 import {ServiceMessageSettings} from '@tb-modules/message/services/messageSettings.service';
 import {getRetellingMessages} from './action/getRetellingMessages.action';
 import {ServiceMessageAi} from '@tb-modules/message/services/messageAi.service';
-import {getPromt} from './action/getPromt.action';
-import {removePromt} from './action/removePromt.action';
 import {getSizeMemory} from './action/getSizeMemory.action';
 import {removeAllMemory} from './action/removeAllMemory.action';
+import {removePrompt} from './action/removePromt.action';
+import {getPrompt} from './action/getPromt.action';
 
 @Update()
 export class CommandsBotMessage {
@@ -30,9 +30,9 @@ export class CommandsBotMessage {
     await getRetellingMessages(ctx, this.serviceMessageAi, 'command');
   }
 
-  @Command(COMMANDS_BOT_MESSAGE.getPromt.command)
-  async getPromt(@Ctx() ctx: Context) {
-    await getPromt(ctx, this.serviceMessageSettings, 'command');
+  @Command(COMMANDS_BOT_MESSAGE.getPrompt.command)
+  async getPrompt(@Ctx() ctx: Context) {
+    await getPrompt(ctx, this.serviceMessageSettings, 'command');
   }
 
   @Command(COMMANDS_BOT_MESSAGE.getMemory.command)
@@ -52,14 +52,14 @@ export class CommandsBotMessage {
     );
   }
 
-  @Command(COMMANDS_BOT_MESSAGE.setPromt.command)
-  async setPromt(@Ctx() ctx: Scenes.WizardContext) {
-    await ctx.scene.enter('set_retelling_promt');
+  @Command(COMMANDS_BOT_MESSAGE.setPrompt.command)
+  async setPrompt(@Ctx() ctx: Scenes.WizardContext) {
+    await ctx.scene.enter('set_retelling_prompt');
   }
 
-  @Command(COMMANDS_BOT_MESSAGE.removePromt.command)
-  async removePromt(@Ctx() ctx: Context) {
-    await removePromt(ctx, this.serviceMessageSettings, 'command');
+  @Command(COMMANDS_BOT_MESSAGE.removePrompt.command)
+  async removePrompt(@Ctx() ctx: Context) {
+    await removePrompt(ctx, this.serviceMessageSettings, 'command');
   }
 
   @Command(COMMANDS_BOT_MESSAGE.clear.command)
