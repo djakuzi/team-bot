@@ -7,7 +7,7 @@ import {getLastUsedModels} from './action/getLastUsedModels.action';
 import {getListModels} from './action/getListModels.action';
 
 @Update()
-export class CommandsBotMessage {
+export class CommandsBotAi {
   constructor(private readonly serviceAi: ServiceAi) {}
 
   @Command(COMMANDS_BOT_AI.addNewModel.command)
@@ -22,7 +22,7 @@ export class CommandsBotMessage {
 
   @Command(COMMANDS_BOT_AI.getListModels.command)
   async getListModels(@Ctx() ctx: Context) {
-    await getListModels(ctx, this.serviceAi, 'action');
+    await getListModels(ctx, this.serviceAi, 'command');
   }
 
   @Command(COMMANDS_BOT_AI.clearAddedModels.command)

@@ -10,5 +10,6 @@ export class OnBotMessage {
   @On('message')
   async onMessage(@Ctx() ctx: Context) {
     await OnAddMessage(ctx, this.serviceMessage);
+    return;
   }
 }
