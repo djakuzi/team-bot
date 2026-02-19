@@ -54,6 +54,6 @@ export class ServiceMessageAi {
       temperature: 0.8,
     });
 
-    return retelling ?? 'Не удалсь получить пересказ';
+    return retelling ?? 'Не удалось получить пересказ';
   }
 }

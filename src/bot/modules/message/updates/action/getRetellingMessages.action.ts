@@ -19,7 +19,6 @@ export async function getRetellingMessages(
 
   if (isAction) {
     await ctx.editMessageText(message.text, {
-      parse_mode: 'Markdown',
       reply_markup: {
         inline_keyboard: [
           [
@@ -34,8 +33,6 @@ export async function getRetellingMessages(
   }
 
   if (isCommand) {
-    await ctx.reply(message.text, {
-      parse_mode: 'Markdown',
-    });
+    await ctx.reply(message.text);
   }
 }
